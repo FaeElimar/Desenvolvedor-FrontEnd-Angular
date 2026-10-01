@@ -1,0 +1,61 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: #bdd3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+input::placeholder {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: #a0a0a0;
+}
+
+.btn-entrar {
+    background-color: rgb(13, 124, 197);
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0.4, 0, 0.4);
+}
+
+.link-senha {
+    display: block;
+    margin-top: 10px;
+    color: #666666; 
+    text-decoration: none;
+    text-align: center;
+    font-size: 11px;
+}
+
+.link-senha:hover {
+    color: blue;
+}
+
+.logo {
+    color: #0e418d;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+
+
+
