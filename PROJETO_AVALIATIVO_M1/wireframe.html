@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo Completo - AVA-EDUCA+</title>
+    <style>
+        /* 1. VARIÁVEIS E RESET BÁSICO */
+        :root {
+            --bg-color: #F4F6F9;
+            --primary-color: #1A5276;
+            --text-color: #333333;
+            --card-bg: #FFFFFF;
+            --border-color: #E0E0E0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; height: 100vh; display: flex; flex-direction: column; }
+
+        /* Botões e Inputs Padrão */
+        .btn-primario { background-color: var(--primary-color); color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; }
+        .btn-primario:hover { opacity: 0.9; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 6px; }
+        label { font-size: 14px; font-weight: 600; }
+
+        /* ========================================================
+           2. ECRÃ DE LOGIN (RF01)
+           ======================================================== */
+        #tela-login { display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { background-color: var(--card-bg); padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center; }
+        .login-card h1 { color: var(--primary-color); margin-bottom: 10px; }
+        .link-senha { display: block; margin-top: 15px; color: var(--primary-color); text-decoration: none; font-size: 14px; }
+
+        /* ========================================================
+           3. ÁREA LOGADA (CABEÇALHO E MENU)
+           ======================================================== */
+        #area-logada { display: none; flex-direction: column; height: 100vh; }
+        
+        header { background-color: var(--primary-color); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 30; }
+        .header-logo { display: flex; align-items: center; gap: 15px; font-size: 20px; font-weight: bold; }
+        .menu-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; display: none; }
+
+        .layout-app { display: flex; flex: 1; overflow: hidden; }
+
+        aside { width: 250px; background-color: var(--card-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 20; transition: transform 0.3s ease; }
+        aside nav { display: flex; flex-direction: column; padding-top: 20px; }
+        aside button { background: none; border: none; padding: 15px 20px; text-align: left; font-size: 16px; cursor: pointer; color: var(--text-color); border-left: 4px solid transparent; transition: 0.2s; }
+        aside button:hover { background-color: var(--bg-color); }
+        aside button.active { border-left-color: var(--primary-color); background-color: #e3f2fd; color: var(--primary-color); font-weight: bold; }
+        aside button:disabled { color: #A0A0A0; cursor: not-allowed; }
+        .btn-sair { margin-top: auto; border-top: 1px solid var(--border-color); color: #d32f2f !important; }
+
+        .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 15; display: none; opacity: 0; transition: opacity 0.3s; }
+
+        /* ========================================================
+           4. CONTEÚDOS (Dashboard e Cadastro)
+           ======================================================== */
+        main { flex: 1; padding: 30px; overflow-y: auto; }
+        main h2 { color: var(--primary-color); margin-bottom: 20px; }
+
+        /* Dashboard (RF04) */
+        .grid-cursos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid var(--primary-color); }
+        .card h3 { margin-bottom: 12px; font-size: 18px; }
+        .card p { font-size: 14px; margin-bottom: 6px; color: #555; display: flex; justify-content: space-between; align-items: center;}
+        .badge { background: #e3f2fd; color: var(--primary-color); padding: 4px 8px; border-radius: 4px; font-weight: bold;}
+
+        /* Cadastro (RF05) */
+        .form-cadastro { background-color: var(--card-bg); padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        /* ========================================================
+           5. RESPONSIVIDADE MOBILE (RF09)
+           ======================================================== */
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            aside { position: fixed; top: 0; left: 0; height: 100vh; transform: translateX(-100%); box-shadow: 5px 0 15px rgba(0,0,0,0.2); }
+            aside.menu-aberto { transform: translateX(0); }
+            .overlay.menu-aberto { display: block; opacity: 1; }
+            .grid-cursos { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            main { padding: 20px; }
+            .login-card { margin: 20px; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         TELA 1: LOGIN (RF01)
+         ========================================== -->
+    <div id="tela-login">
+        <div class="login-card">
+            <h1>AVA-EDUCA+</h1>
+            <p style="color: #666; margin-bottom: 25px;">Acesso da equipa pedagógica</p>
+            <form onsubmit="event.preventDefault(); fazerLogin();">
+                <div style="text-align: left;">
+                    <label>E-mail</label>
+                    <input type="email" value="professor@edutech.com" required>
+                    
+                    <label>Senha</label>
+                    <input type="password" value="123456" required>
+                </div>
+                <button type="submit" class="btn-primario">Entrar no Sistema</button>
+                <a href="#" class="link-senha" onclick="alert('Funcionalidade em construção')">Esqueci minha senha</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         TELA 2: ÁREA LOGADA
+         ========================================== -->
+    <div id="area-logada">
+        <!-- Cabeçalho (RF02) -->
+        <header>
+            <div class="header-logo">
+                <button class="menu-btn" onclick="alternarMenu()">☰</button>
+                <span>AVA-EDUCA+</span>
+            </div>
+            <div>👤 Elimar</div>
+        </header>
+
+        <div class="layout-app">
+            <div class="overlay" id="fundo-escuro" onclick="alternarMenu()"></div>
+
+            <!-- Menu Lateral (RF03) -->
+            <aside id="menu-lateral">
+                <nav>
+                    <button id="btn-dash" class="active" onclick="navegar('dashboard')">Dashboard</button>
+                    <button disabled>Cursos (Em breve)</button>
+                    <button id="btn-cad" onclick="navegar('cadastro')">Cadastro de Alunos</button>
+                </nav>
+                <button class="btn-sair" onclick="fazerLogout()">Sair</button>
+            </aside>
+
+            <!-- Conteúdo Principal -->
+            <main>
+                <!-- Visão: Dashboard (RF04) -->
+                <section id="conteudo-dashboard">
+                    <h2>Meus Cursos em Andamento</h2>
+                    <div class="grid-cursos">
+                        <div class="card">
+                            <h3>Desenvolvimento Web</h3>
+                            <p>Início: <span class="badge">02/02/2026</span></p>
+                            <p>Fim: <span class="badge">30/04/2026</span></p>
+                        </div>
+                        <div class="card">
+                            <h3>HTML e CSS Essencial</h3>
+                            <p>Início: <span class="badge">09/03/2026</span></p>
+                            <p>Fim: <span class="badge">17/04/2026</span></p>
+                        </div>
+                        <div class="card">
+                            <h3>JavaScript Iniciantes</h3>
+                            <p>Início: <span class="badge">04/05/2026</span></p>
+                            <p>Fim: <span class="badge">31/07/2026</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Visão: Cadastro de Aluno (RF05) -->
+                <section id="conteudo-cadastro" style="display: none;">
+                    <h2>Novo Aluno</h2>
+                    <div class="form-cadastro">
+                        <form onsubmit="event.preventDefault(); alert('Aluno cadastrado com sucesso!');">
+                            <div class="form-grid">
+                                <div><label>Nome Completo</label><input type="text" placeholder="Mínimo 4 caracteres" required></div>
+                                <div><label>CPF</label><input type="text" placeholder="000.000.000-00" required></div>
+                                <div><label>Gênero</label>
+                                    <select required>
+                                        <option value="">Selecione...</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Feminino</option>
+                                    </select>
+                                </div>
+                                <div><label>Data de Nascimento</label><input type="date" required></div>
+                                <div><label>E-mail</label><input type="email" required></div>
+                                <div><label>Telefone</label><input type="tel" required></div>
+                                <div><label>CEP (Busca ViaCEP)</label><input type="text" placeholder="Ex: 01001-000"></div>
+                                <div><label>Endereço Completo</label><input type="text" placeholder="Preenchimento automático" disabled></div>
+                            </div>
+                            <button type="submit" class="btn-primario" style="width: auto; padding: 12px 40px;">Salvar Cadastro</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- SCRIPTS PARA NAVEGAÇÃO -->
+    <script>
+        // Entrar no sistema (sai do Login e vai para a área logada)
+        function fazerLogin() {
+            document.getElementById('tela-login').style.display = 'none';
+            document.getElementById('area-logada').style.display = 'flex';
+            navegar('dashboard');
+        }
+
+        // Sair do sistema
+        function fazerLogout() {
+            document.getElementById('area-logada').style.display = 'none';
+            document.getElementById('tela-login').style.display = 'flex';
+        }
+
+        // Alternar entre Dashboard e Cadastro
+        function navegar(tela) {
+            // Fecha o menu mobile ao clicar num link
+            document.getElementById('menu-lateral').classList.remove('menu-aberto');
+            document.getElementById('fundo-escuro').classList.remove('menu-aberto');
+
+            // Reseta botões e vistas
+            document.getElementById('btn-dash').classList.remove('active');
+            document.getElementById('btn-cad').classList.remove('active');
+            document.getElementById('conteudo-dashboard').style.display = 'none';
+            document.getElementById('conteudo-cadastro').style.display = 'none';
+
+            // Ativa a tela escolhida
+            if(tela === 'dashboard') {
+                document.getElementById('btn-dash').classList.add('active');
+                document.getElementById('conteudo-dashboard').style.display = 'block';
+            } else if (tela === 'cadastro') {
+                document.getElementById('btn-cad').classList.add('active');
+                document.getElementById('conteudo-cadastro').style.display = 'block';
+            }
+        }
+
+        // Abre/Fecha o menu lateral no Telemóvel
+        function alternarMenu() {
+            document.getElementById('menu-lateral').classList.toggle('menu-aberto');
+            document.getElementById('fundo-escuro').classList.toggle('menu-aberto');
+        }
+    </script>
+</body>
+</html>
