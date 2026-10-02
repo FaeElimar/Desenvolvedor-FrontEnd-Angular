@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.conteudo-dashboard h1 {
+    margin-bottom: 20px;
+    color: #0c2844;
+}
+
+.container-principal {
+  display: flex;
+  min-height: 100vh;
+}
+
+.menu-lateral {
+  width: 250px;
+  background-color: #0c2844;
+  color: white;
+}
+
+.conteudo-dashboard {
+  flex: 1;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+.painel-cartoes {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.cartao-aluno {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.cabecalho img {
+  height: 80px;
+}
+
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-lateral a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: 15px 20px;
+}
+
+.menu-lateral a:hover {
+  background-color: #34495e;
+}
