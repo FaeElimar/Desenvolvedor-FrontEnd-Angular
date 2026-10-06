@@ -34,3 +34,5 @@ O projeto está organizado em uma arquitetura de pastas que separa responsabilid
 * Desenvolver a tela e a funcionalidade da funcionalidade "Esqueceu sua senha".
 * Criar a página de detalhes de "Cursos", que atualmente encontra-se desabilitada no menu.
 * Implementar a funcionalidade de edição e exclusão de alunos já cadastrados.
+
+* Projeto Pronto
