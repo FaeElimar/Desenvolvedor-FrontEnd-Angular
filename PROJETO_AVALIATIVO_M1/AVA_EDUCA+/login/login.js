@@ -10,9 +10,12 @@ formLogin.addEventListener('submit', function(event) {
 
     login(emailDigitado, senhaDigitada)
     .then(usuarioLogado => {
-        // Corrigido: usuarioLogado 
+        // Guarda o utilizador logado na session storage
         sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
         alert("Login efetuado com sucesso!");
+        
+        // Redireciona automaticamente para a página do Dashboard
+        window.location.href = "../dashboard/dashboard.html";
     })
     .catch((erro) => {
         alert(erro);

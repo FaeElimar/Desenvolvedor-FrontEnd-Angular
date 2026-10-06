@@ -5,6 +5,12 @@ sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioTeste));
 
 const usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
+const dadosUsuario = sessionStorage.getItem('usuarioLogado');
+if (dadosUsuario) {
+    const usuario = JSON.parse(dadosUsuario);
+    document.getElementById('nome-usuario').textContent = usuario.nome;
+}
+
 listarCursos(usuario)
   .then((cursos) => {
     const painel = document.querySelector('.painel-cartoes');

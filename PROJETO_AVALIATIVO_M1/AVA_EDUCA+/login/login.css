@@ -8,6 +8,16 @@ body {
     height: 100vh;
 }
 
+.logo-login {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.img-logo {
+    max-width: 150px;
+    height: auto;
+}
+
 #login {
     background-color: #FFFFFF;
     padding: 20px;
