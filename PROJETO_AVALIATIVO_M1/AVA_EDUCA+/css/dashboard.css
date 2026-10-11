@@ -43,6 +43,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+
 .cabecalho {
   display: flex;
   justify-content: space-between;
@@ -52,6 +53,41 @@ body {
 
 .cabecalho img {
   height: 80px;
+}
+
+/* Alinhamento da Logo com o Nome */
+.bloco-logo-nome {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bloco-logo-nome img {
+    display: block;
+}
+
+/* O ajuste cirúrgico vertical para alinhar com o sinal de + */
+.saudacao {
+    font-size: 15px;
+    display: inline-block;
+    transform: translateY(11px); /* Ajuste este valor se precisar afinar */
+    color: #333333;
+}
+
+#nome-usuario {
+    margin-left: 4px;
+}
+
+.btn-sair-link {
+    text-decoration: underline;
+    color: #666666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-sair-link:hover {
+    color: #d9534f;
 }
 
 .menu-lateral ul {

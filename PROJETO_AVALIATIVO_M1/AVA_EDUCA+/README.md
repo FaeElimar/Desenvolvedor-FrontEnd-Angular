@@ -1,38 +1,55 @@
-# AVA-EDUCA+
+# Projeto Avaliativo - AVA-EDUCA+ 🎓
 
-## Descrição do Projeto
-O AVA-EDUCA+ é um protótipo de plataforma acadêmica desenvolvido para resolver o problema da descentralização de informações. Ele centraliza os dados de alunos e cursos, facilitando o trabalho da equipe pedagógica no acompanhamento acadêmico, substituindo o uso de diversas planilhas e sistemas isolados por uma interface única e responsiva.
+Este é o projeto final do curso Carreira Tech - Trilha Desenvolvimento de Software 
+Fundamentos da Programação com JavaScript T1.
+O objetivo foi criar a interface de um painel educacional (Dashboard) e aplicar regras de negócio usando JavaScript (sem back-end).
 
-## Técnicas e Tecnologias Utilizadas
-* **HTML5:** Estruturação semântica da aplicação.
-* **CSS3:** Estilização responsiva utilizando Flexbox e CSS Grid.
-* **JavaScript (Vanilla):** Lógica de negócios, manipulação do DOM e eventos.
-* **ES6 Modules:** Organização do código JavaScript em módulos (`import`/`export`).
-* **Armazenamento Web:** Uso de `sessionStorage` para autenticação de login e `localStorage` para persistência dos dados cadastrados (CRUD).
-* **APIs e Bibliotecas Externas:** 
-  * Integração com a API **ViaCEP** (via `fetch`) para preenchimento automático de endereços.
-  * Uso da biblioteca **Moment.js** para validação de datas.
+## O que eu fiz neste projeto
 
-## Estrutura do Projeto
-O projeto está organizado em uma arquitetura de pastas que separa responsabilidades:
-* `/assets`: Imagens e ícones.
-* `/css`: Folhas de estilo globais e específicas das páginas.
-* `/js`: Lógica central do sistema, módulos de autenticação, cursos e alunos, incluindo a classe `Aluno.js`.
-* `/dados`: Arquivos de simulação de banco de dados (`listagem-usuarios.js`, `listagem-cursos.js`, `listagem-alunos.js`).
-* `/login`, `/dashboard`, `/cadastro-aluno`: Diretórios contendo as páginas HTML de cada módulo.
+- **Login Simulado:** Como ainda não conectamos o projeto a um banco de dados real, usei o `sessionStorage` para guardar a sessão de quem faz o login.
+- **Cards Dinâmicos:** A tela do Dashboard puxa as informações dos cursos diretamente de um arquivo `.js` criado com os dados fornecidos pelo professor e mostra na tela usando JavaScript. 
+- **Segurança de Rotas:** Se tentar entrar no Dashboard sem fazer login antes, o JavaScript bloqueia e manda de volta para a tela inicial.
+- **Design:** Usei HTML para a estrutura e CSS Flexbox e Grid para organizar a tela e deixar responsivo.
 
-## Como Executar
-1. Faça o clone deste repositório na sua máquina ou baixe o código fonte.
-2. Abra a pasta do projeto em um editor de código (como o VS Code).
-3. Devido ao uso de ES6 Modules, é necessário rodar o projeto em um servidor local. Recomenda-se o uso da extensão **Live Server** no VS Code.
-4. Clique com o botão direito no arquivo `index.html` (na raiz do projeto) e selecione "Open with Live Server".
-5. O sistema abrirá automaticamente no navegador.
-6. (Acesso de teste - E-mail: ana.silva@edutech.com / Senha: 123456).
+## Nota de Transparência e Uso de IA
 
-## Melhorias que Podem ser Aplicadas Futuramente
-* Implementar um back-end real com banco de dados (ex: Node.js e PostgreSQL) para substituir o uso do `localStorage` e dos arquivos estáticos de listagem.
-* Desenvolver a tela e a funcionalidade da funcionalidade "Esqueceu sua senha".
-* Criar a página de detalhes de "Cursos", que atualmente encontra-se desabilitada no menu.
-* Implementar a funcionalidade de edição e exclusão de alunos já cadastrados.
+Durante o desenvolvimento deste projeto, utilizei a Inteligência Artificial como uma ferramenta de apoio para tirar dúvidas e destravar em algumas partes do código, principalmente para:
 
-* Projeto Pronto
+- **Lógica e Promises:** A estruturação da lógica com *Promises* para fazer o carregamento e filtro dos dados teve o auxílio da IA. Ela ajudou-me a entender como o JavaScript lida com retornos de dados assíncronos.
+- **Correções (Debugging):** Quando ocorreram erros no Console (como falhas de caminhos de *import* ou variáveis não reconhecidas no módulo JavaScript), usei a IA para entender as mensagens de erro e aplicar as devidas revisões na estrutura do código e na sintaxe de exportação.
+- **JavaScript:** Minha maior dificuldade neste projeto foi a montagem do código em JavaScript. Por isso, utilizei a Inteligência Artificial como uma ferramenta de apoio para me ajudar a estruturar o código e destravar nos momentos em que eu ficava preso.
+
+
+## Tecnologias utilizadas
+- HTML5 (Tags semânticas)
+- CSS3 (Flexbox e Grid Layout)
+- JavaScript (Módulos, Arrow Functions, Manipulação de DOM e Promises)
+
+## Como rodar o projeto
+
+1. Baixe os arquivos do projeto ou clone o repositório.
+2. Abra a pasta do projeto no seu editor de código (como o VS Code).
+3. Para evitar erros no JavaScript (erro de CORS por causa dos `imports`), instale a extensão **Live Server**.
+4. Clique com o botão direito no arquivo `index.html` (na pasta `login`) e escolha **"Open with Live Server"**.
+
+## Passo a passo para testar
+
+O banco de dados de usuários e cursos foi dado pelo professor em arquivos `.js`. Para acessar o sistema e ver o painel funcionar, use um dos e-mails e senhas abaixo na tela de login:
+
+**Usuário 1 (Tem 5 cursos):**
+- **E-mail:** `ana.silva@edutech.com`
+- **Senha:** `123456`
+
+**Usuário 2 (Tem 2 cursos):**
+- **E-mail:** `carlos.santos@edutech.com`
+- **Senha:** `654321`
+
+**Usuário 3 (Sem cursos cadastrados):**
+- **E-mail:** `mariana.costa@edutech.com`
+- **Senha:** `edu2026`
+
+Após o login, o sistema vai montar os cartões de cursos do professor logado no Dashboard.
+Para sair e testar a proteção de tela, basta clicar em "Sair" no cabeçalho a direita.
+
+---
+Desenvolvido por **Elimar Faé** como projeto de avaliação prática.
