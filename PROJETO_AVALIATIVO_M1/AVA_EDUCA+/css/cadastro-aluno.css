@@ -82,3 +82,47 @@ body {
         grid-column: span 1;
     }
 }
+
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.bloco-logo-nome {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bloco-logo-nome img {
+    display: block;
+}
+
+.saudacao {
+    font-size: 15px;
+    display: inline-block;
+    transform: translateY(11px); /* Ajuste este valor se precisar subir/descer mais */
+    color: #333333;
+}
+
+#nome-usuario {
+    margin-left: 4px;
+}
+
+.btn-sair-link {
+    text-decoration: underline;
+    color: #666666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-sair-link:hover {
+    color: #12a838; /* Fica verde subtil ao passar o mouse */
+}

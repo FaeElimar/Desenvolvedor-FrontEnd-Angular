@@ -10,12 +10,18 @@ formLogin.addEventListener('submit', function(event) {
 
     login(emailDigitado, senhaDigitada)
     .then(usuarioLogado => {
-        // Guarda o utilizador logado na session storage
-        sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+
+        const nomeExtraido = (usuarioLogado && usuarioLogado.nome) ? usuarioLogado.nome : emailDigitado.split('@')[0];
+        
+        const dadosSessao = {
+            nome: nomeExtraido,
+            email: emailDigitado
+        };
+
+        sessionStorage.setItem('usuarioLogado', JSON.stringify(dadosSessao));
         alert("Login efetuado com sucesso!");
         
-        // Redireciona automaticamente para a página do Dashboard
-        window.location.href = "../dashboard/dashboard.html";
+        window.location.href = "dashboard/dashboard.html";
     })
     .catch((erro) => {
         alert(erro);
