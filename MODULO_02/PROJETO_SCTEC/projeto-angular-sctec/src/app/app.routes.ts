@@ -1,15 +1,27 @@
-// app.routes.ts - MAPA DE ROTAS: "quando a URL for X, mostre o componente Y" dentro do <router-outlet>.
 import { Routes } from '@angular/router';
-import { CadastroAluno } from './pages/cadastro-aluno/cadastro-aluno';
-import { Contato } from './pages/contato/contato';
-import { Inicio } from './pages/inicio/inicio';
+// (os 3 imports de componentes que estavam aqui foram APAGADOS)
 
 export const routes: Routes = [
-  // Rota vazia (http://localhost:4200/) abre a página Início. JÁ ESTÁ PRONTA: use como modelo.
-  { path: '', component: Inicio, title: 'Início | Projeto SCTEC' },
-  { path: 'contato', component: Contato, title: 'Contato | Projeto SCTEC' },
-  { path: 'cadastro', component: CadastroAluno, title: 'Cadastro | Projeto SCTEC' },
+  {
+    path: '',
+    loadComponent: () => import('@features/inicio/inicio').then((m) => m.Inicio),
+    title: 'Início | Projeto SCTEC',
+  },
+  {
+    path: 'alunos',
+    loadChildren: () => import('@features/alunos/alunos.routes').then((m) => m.ALUNOS_ROUTES),
+  },
+  {
+    path: 'contato',
+    loadComponent: () => import('@features/contato/contato').then((m) => m.Contato),
+    title: 'Contato | Projeto SCTEC',
+  },
 
-  // Qualquer endereço desconhecido volta para o Início. Deve ser SEMPRE a última rota.
+  {
+    path: 'cursos',
+    loadChildren: () => import('@features/cursos/cursos.routes').then((m) => m.CURSOS_ROUTES),
+  },
+
+  { path: 'cadastro', redirectTo: 'alunos/cadastro' },
   { path: '**', redirectTo: '' },
 ];
